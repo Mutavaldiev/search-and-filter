@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'home.css' %}">      
+    <title>My Store</title>
+</head>
+<body>
+
+<div>
+    <a href="/">Home</a>
+    <a href="{% url 'products' %}">Products</a>
+    <a href="{% url 'categories' %}">Categories</a>
+    <a href="{% url 'orders' %}">Orders</a>
+</div>
+<div>
+    <img src="{{ product.photo.url }}" width="200">
+     <h1>{{product.product_name}}</h1>   
+     <p>{{product.category_id.category_name}}</p>
+     <p>{{product.price}}</p>
+     <p>{{product.stock}}</p>
+</div>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="customer_name" placeholder="Customer name">
+        <input type="number" name="count" placeholder="count" max="{{product.stock}}">
+        <button type="submit">SAVE</button>
+    </form>
+    
+</body>
+</html>
+</body>
+</html>
