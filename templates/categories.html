@@ -9,17 +9,22 @@
 </head>
 <body>
 
-
 <div>
     <a href="/">Home</a>
     <a href="{% url 'products' %}">Products</a>
     <a href="{% url 'categories' %}">Categories</a>
     <a href="{% url 'orders' %}">Orders</a>
+    <a href="{% url 'add_category' %}">Add Category</a>
+    <a href="{% url 'add_product' %}">Add Product</a>
+
 </div>
 
 <section class="categories">
     <h2>Categories</h2>
 
+<a href="{% url 'add_category' %}">
+    <button>Add Category</button>
+</a>
     <form method="POST">
         {% csrf_token %}
         <input type="text" name="category_name"

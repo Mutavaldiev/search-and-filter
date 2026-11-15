@@ -13,11 +13,16 @@
     <a href="{% url 'products' %}">Products</a>
     <a href="{% url 'categories' %}">Categories</a>
     <a href="{% url 'orders' %}">Orders</a>
+    <a href="{% url 'add_category' %}">Add Category</a>
+    <a href="{% url 'add_product' %}">Add Product</a>
 </div>
 
 
 <section class="products">
     <h2>Products</h2>
+<a href="{% url 'add_product' %}">
+    <button>Add Product</button>
+</a>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -46,6 +51,9 @@
 
     <div class="product-list">
         {% for product in products %}
+<a href="{% url 'create_order' product.id %}">
+    <button>Add Order</button>
+</a>
         <article class="product-card">
 
             {% if product.photo %}

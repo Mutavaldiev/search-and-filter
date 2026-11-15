@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Add Product</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="text" name="product_name"
+           placeholder="Product name" required>
+
+    <select name="category_id" required>
+        {% for category in categories %}
+            <option value="{{ category.id }}">
+                {{ category.category_name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <input type="number" name="price"placeholder="Price" step="0.01" required>
+    <input type="file" name="photo" required>
+    <input type="number" name="stock"placeholder="Stock" required>
+    <button type="submit">Save Product</button>
+</form>
+</body>
+</html>

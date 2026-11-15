@@ -36,10 +36,7 @@ def get_products(request):
 
 def categories(request):
     categories = Category.objects.all()
-
-    return render(request, 'categories.html', {
-        'categories': categories
-    })
+    return render(request, 'categories.html', {'categories': categories})
 
 
 def products(request):
@@ -53,6 +50,32 @@ def orders(request):
     orders = Order.objects.all()
     return render(request, 'orders.html', {'orders': orders})
 
+
+def add_category(request):
+    if request.method == 'POST':
+        Category.objects.create(
+            category_name=request.POST.get('category_name')
+        )
+        return redirect('categories')
+    return render(request, 'add_category.html')
+
+
+
+
+
+def add_product(request):
+    if request.method == 'POST':
+        Product.objects.create(
+            product_name=request.POST.get('product_name'),
+            category_id=Category.objects.get(
+                id=request.POST.get('category_id')
+            ),
+            price=request.POST.get('price'),
+            photo=request.FILES.get('photo'),
+            stock=request.POST.get('stock')
+        )
+        return redirect('products')
+    return render(request, 'add_product.html', {'categories': Category.objects.all()})
 
 
 
